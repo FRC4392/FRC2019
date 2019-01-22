@@ -3,6 +3,7 @@ package frc.robot.Subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivetrain{
@@ -19,6 +20,9 @@ public class Drivetrain{
 
         SmartDashboard.putNumber("Left", left);
         SmartDashboard.putNumber("Right", right);}
+        public void init() {
+            
+        }
     } 
         
 

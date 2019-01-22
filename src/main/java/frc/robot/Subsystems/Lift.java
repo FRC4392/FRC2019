@@ -6,4 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 public class Lift{
     private TalonSRX Motor1;
     private TalonSRX Motor2;
+    public void init() {
+        
+    }
 }
