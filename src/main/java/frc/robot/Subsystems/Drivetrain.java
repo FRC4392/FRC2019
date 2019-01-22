@@ -11,7 +11,7 @@ public class Drivetrain{
         left1.set(ControlMode.PercentOutput, -left);
         left2.set(ControlMode.PercentOutput, -left);
         
-        Right.set(ControlMode.PercentOutput, -right)
+        Right.set(ControlMode.PercentOutput, -right);
         right1.set(ControlMode.PercentOutput, -right);
         right2.set(ControlMode.PercentOutput, -right);
 
