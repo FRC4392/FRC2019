@@ -13,7 +13,6 @@ public class Intake{
 
     private TalonSRX mintake1 = new TalonSRX(deviceNumber);
     private TalonSRX mintake2 = new TalonSRX(deviceNumber);
-    private Solenoid mjaw = new Solenoid(channel);
     private Solenoid mPivot = new Solenoid(channel);
 
     public Intake(){
