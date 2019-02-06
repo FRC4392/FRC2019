@@ -10,6 +10,16 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 public class Lift{
     private TalonSRX mMotor1;
     private TalonSRX mMotor2;
+
+    private static double offset = -400;
+    private static double diameter = 1.273;
+    private static double circumference = Math.PI * diameter;
+    private static double countsPerRot = 4096;
+    private static double distancePerCount = circumference/countsPerRot;
+    private static double countsPerDistance = countsPerRot/circumference;
+
+    double setPosition = 0;
+
     public Lift() {
         mMotor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         mMotor1.setSensorPhase(false);
