@@ -13,7 +13,6 @@ public class Intake{
 
     private TalonSRX mintake1 = new TalonSRX(deviceNumber);
     private TalonSRX mintake2 = new TalonSRX(deviceNumber);
-    private Solenoid mPivot = new Solenoid(channel);
 
     public Intake(){
         mintake1.follow(mintake2);
@@ -36,17 +35,5 @@ public class Intake{
 
     public void stop() {
         setSpeed(0);
-    }
-
-    public void setPivotUp() {
-        setPivot(true);
-    }
-
-    public void setPivotDown() {
-        setPivot(false);
-    }
-
-    public void setPivot(boolean down) {
-        Pivot.set(down);        
-    }
+    } 
 }
