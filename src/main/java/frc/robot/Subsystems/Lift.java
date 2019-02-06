@@ -55,7 +55,7 @@ public class Lift{
         double counts = (countsPerDistance * inches * -1 + offset)/2;
     }
 
-    public void getHeight() {
+    public double getHeight() {
         return mMotor1.getSelectedSensorPosition(0) *distancePerCount;
     }
     public boolean getOnHeight(double target){
