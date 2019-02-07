@@ -9,7 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class Lift{
     private TalonSRX mMotor1;
-    private TalonSRX mMotor2;
+    private VictorSPX mMotor2;
 
     private static double offset = -400;
     private static double diameter = 1.273;

@@ -5,8 +5,9 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class Fourbar{
     private TalonSRX IntakePivot, ArmPivot;
-    public void init() {
-        
+
+    public Fourbar(){
+
     }
 
 }

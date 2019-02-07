@@ -12,17 +12,14 @@ public class Intake{
     double outtakeSpeed = .5;
 
     private TalonSRX mintake1 = new TalonSRX(deviceNumber);
-    private TalonSRX mintake2 = new TalonSRX(deviceNumber);
 
     public Intake(){
-        mintake1.follow(mintake2);
         mintake1.setInverted(true);
         mintake1.setNeutralMode(NeutralMode.Brake);
-        mintake2.setNeutralMode(NeutralMode.Brake);
     }
     
     public void setSpeed(double speed) {
-        mintake2.set(ControlMode.PercentOutput, speed);
+        mintake1.set(ControlMode.PercentOutput, speed);
     }
 
     public void setIntake() {
