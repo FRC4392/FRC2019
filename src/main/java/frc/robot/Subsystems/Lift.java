@@ -11,8 +11,8 @@ public class Lift{
     private TalonSRX mMotor1;
     private VictorSPX mMotor2;
 
-    private static double offset = -400;
-    private static double diameter = 1.273;
+    private static double offset = -0;
+    private static double diameter = 1.25;
     private static double circumference = Math.PI * diameter;
     private static double countsPerRot = 4096;
     private static double distancePerCount = circumference/countsPerRot;
@@ -21,6 +21,9 @@ public class Lift{
     double setPosition = 0;
 
     public Lift() {
+        mMotor1 = new TalonSRX(21);
+        mMotor2 = new VictorSPX(22);
+
         mMotor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         mMotor1.setSensorPhase(false);
         mMotor1.setInverted(false);
@@ -52,7 +55,7 @@ public class Lift{
         mMotor2.follow(mMotor1);
     }
     public void setHeight(double inches) {
-        double counts = (countsPerDistance * inches * -1 + offset)/2;
+        double counts = (countsPerDistance * inches);
     }
 
     public double getHeight() {

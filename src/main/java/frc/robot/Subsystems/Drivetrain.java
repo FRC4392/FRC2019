@@ -1,6 +1,7 @@
 package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -19,57 +20,57 @@ public class Drivetrain{
         mRight2 = new VictorSPX(Constants.DrivetrainRight2DeviceID);
         mRight3 = new VictorSPX(Constants.DrivetrainRight3DeviceID);
 
-        mLeft1.configSelectedFeedbackSensor(feedbackDevice);
+       // mLeft1.configSelectedFeedbackSensor(feedbackDevice);
         mLeft1.setSensorPhase(Constants.LeftDrivetrainSensorPhase);
         mLeft1.setInverted(Constants.LeftDriveMotorsInverted);
-        mLeft1.setStatusFramePeriod(frame, periodMs);
+        //mLeft1.setStatusFramePeriod(frame, periodMs);
         mLeft1.configNominalOutputForward(Constants.DrivetrainNominalOutputForward);
         mLeft1.configNominalOutputReverse(Constants.DrivetrainNominalOutputReverse);
         mLeft1.configPeakOutputForward(Constants.DrivetrainPeakOutputForward);
         mLeft1.configPeakOutputReverse(Constants.DrivetrainPeakOutputReverse);
-        mLeft1.selectProfileSlot(slotIdx, pidIdx);
-        mLeft1.config_kF(slotIdx, value, timeoutMs);
-        mLeft1.config_kP(slotIdx, value, timeoutMs);
-        mLeft1.configMotionCruiseVelocity(sensorUnitsPer100ms);
-        mLeft1.configMotionAcceleration(sensorUnitsPer100msPerSec);
-        mLeft1.setNeutralMode(neutralMode);
+        //mLeft1.selectProfileSlot(slotIdx, pidIdx);
+        //mLeft1.config_kF(slotIdx, value, timeoutMs);
+        //mLeft1.config_kP(slotIdx, value, timeoutMs);
+        //mLeft1.configMotionCruiseVelocity(sensorUnitsPer100ms);
+        //mLeft1.configMotionAcceleration(sensorUnitsPer100msPerSec);
+        mLeft1.setNeutralMode(NeutralMode.Coast);
 
         mLeft2.follow(mLeft1);
-        mLeft2.setInverted(true);
-        mLeft2.setNeutralMode(neutralMode);
+        mLeft2.setInverted(false);
+        mLeft2.setNeutralMode(NeutralMode.Coast);
         mLeft3.follow(mLeft1);
-        mLeft3.setInverted(true);
-        mLeft3.setNeutralMode(neutralMode);
+        mLeft3.setInverted(false);
+        mLeft3.setNeutralMode(NeutralMode.Coast);
 
-        mRight1.configSelectedFeedbackSensor(feedbackDevice);
+        //mRight1.configSelectedFeedbackSensor(feedbackDevice);
         mRight1.setSensorPhase(false);
         mRight1.setInverted(true);
-        mRight1.setStatusFramePeriod(frame, periodMs);
-        mRight1.setStatusFramePeriod(frame, periodMs);
-        mRight1.configNominalOutputForward(percentOut);
-        mRight1.configNominalOutputReverse(percentOut);
-        mRight1.configPeakOutputForward(percentOut);
-        mRight1.configPeakOutputReverse(percentOut);
-        mRight1.selectProfileSlot(slotIdx, pidIdx);
-        mRight1.config_kF(slotIdx, value, timeoutMs);
-        mRight1.config_kP(slotIdx, value, timeoutMs);
-        mRight1.configMotionCruiseVelocity(sensorUnitsPer100ms);
-        mRight1.configMotionAcceleration(sensorUnitsPer100msPerSec);
-        mRight1.setNeutralMode(neutralMode);
+        //mRight1.setStatusFramePeriod(frame, periodMs);
+        //mRight1.setStatusFramePeriod(frame, periodMs);
+        mRight1.configNominalOutputForward(Constants.DrivetrainNominalOutputForward);
+        mRight1.configNominalOutputReverse(Constants.DrivetrainNominalOutputReverse);
+        mRight1.configPeakOutputForward(Constants.DrivetrainPeakOutputForward);
+        mRight1.configPeakOutputReverse(Constants.DrivetrainPeakOutputReverse);
+        //mRight1.selectProfileSlot(slotIdx, pidIdx);
+        //mRight1.config_kF(slotIdx, value, timeoutMs);
+        //mRight1.config_kP(slotIdx, value, timeoutMs);
+        //mRight1.configMotionCruiseVelocity(sensorUnitsPer100ms);
+        //mRight1.configMotionAcceleration(sensorUnitsPer100msPerSec);
+        mRight1.setNeutralMode(NeutralMode.Coast);
 
         mRight2.follow(mRight1);
-        mRight2.setInverted(false);
-        mRight2.setNeutralMode(neutralMode);
+        mRight2.setInverted(true);
+        mRight2.setNeutralMode(NeutralMode.Coast);
         mRight3.follow(mRight1);
-        mRight3.setInverted(false);
-        mRight3.setNeutralMode(neutralMode);
+        mRight3.setInverted(true);
+        mRight3.setNeutralMode(NeutralMode.Coast);
 
     }
 
     public void setLeftRight(double left, double right){
-        mLeft1.set(ControlMode.PercentOutput, -left);
+        mLeft1.set(ControlMode.PercentOutput, left);
         
-        mRight1.set(ControlMode.PercentOutput, -right);
+        mRight1.set(ControlMode.PercentOutput, right);
     }
 } 
         

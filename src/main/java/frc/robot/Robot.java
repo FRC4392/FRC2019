@@ -8,6 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import frc.robot.Subsystems.Drivetrain;
+import frc.robot.Subsystems.Lift;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -17,8 +21,14 @@ import edu.wpi.first.wpilibj.TimedRobot;
  * project.
  */
 public class Robot extends TimedRobot {
+
+  Drivetrain mDrivetrain = new Drivetrain();
+  Lift mLift = new Lift();
+  XboxController mDriverController = new XboxController(0);
+
   /**
-   * This function is run when the robot is first started up and should be used
+   * This function
+   *  is run when the robot is first started up and should be used
    * for any initialization code.
    */
   @Override
@@ -39,6 +49,18 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    Double left = mDriverController.getY(Hand.kLeft);
+    Double right = mDriverController.getY(Hand.kRight);
+
+    mDrivetrain.setLeftRight(left, right);
+
+    if(mDriverController.getAButton()){
+        mLift.setPower(-1);
+    } else if (mDriverController.getBButton()){
+      mLift.setPower(1);
+    } else {
+      mLift.setPower(0);
+    }
   }
 
   @Override

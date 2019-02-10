@@ -1,4 +1,4 @@
-package frc.robot.Subsystems;
+/*package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -33,4 +33,4 @@ public class Intake{
     public void stop() {
         setSpeed(0);
     } 
-}
+}*/
