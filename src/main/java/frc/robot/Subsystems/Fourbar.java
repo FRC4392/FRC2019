@@ -7,6 +7,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class Fourbar{
     private TalonSRX mIntakePivot, mArmPivot;
+    private Double CountsPerRoation = 4096.0;
+    private Double DegreesPerRotation = 360.0;
 
     public Fourbar(){
         mIntakePivot.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
@@ -41,10 +43,10 @@ public class Fourbar{
        // mArmPivot.configMotionAcceleration(sensorUnitsPer100msPerSec);
         mArmPivot.setNeutralMode(NeutralMode.Brake);
     }
-    public void FourbarAngle(Double angel) {
-        
+    public void FourbarAngle(Double angle) {
+        Double counts = angle * (DegreesPerRotation / CountsPerRoation);
     }
-    public void IntakeAngle(Double angel) {
-        
+    public void IntakeAngle(Double angle) {
+        Double counts = angle * (DegreesPerRotation / CountsPerRoation);
     }
 }
