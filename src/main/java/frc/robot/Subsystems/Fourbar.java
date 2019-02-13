@@ -41,10 +41,10 @@ public class Fourbar{
        // mArmPivot.configMotionAcceleration(sensorUnitsPer100msPerSec);
         mArmPivot.setNeutralMode(NeutralMode.Brake);
     }
-    public void FourbarAngel(Double angel) {
+    public void FourbarAngle(Double angel) {
         
     }
-    public void IntakeAngel(Double angel) {
+    public void IntakeAngle(Double angel) {
         
     }
 }
