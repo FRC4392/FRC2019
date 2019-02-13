@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.Subsystems.Drivetrain;
+import frc.robot.Subsystems.Fourbar;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Lift;
 import frc.util.CheesyDriveHelper;
@@ -31,7 +32,7 @@ public class Robot extends TimedRobot {
   XboxController mOperatorController = new XboxController(1);
   CheesyDriveHelper mCheesy = new CheesyDriveHelper();
   Intake mIntake = new Intake();
-
+  Fourbar mFourbar = new Fourbar();
   /**
    * This function
    *  is run when the robot is first started up and should be used
