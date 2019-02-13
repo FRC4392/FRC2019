@@ -5,12 +5,14 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class Drivetrain{
     private TalonSRX mLeft1, mRight1;
     private VictorSPX mLeft2, mLeft3, mRight2, mRight3;
+    private Solenoid mLeftShifter, mRightShifter;
 
     public Drivetrain() {
         mLeft1 = new TalonSRX(Constants.DrivetrainLeft1DeviceID);
@@ -20,7 +22,10 @@ public class Drivetrain{
         mRight2 = new VictorSPX(Constants.DrivetrainRight2DeviceID);
         mRight3 = new VictorSPX(Constants.DrivetrainRight3DeviceID);
 
-       // mLeft1.configSelectedFeedbackSensor(feedbackDevice);
+        mLeftShifter = new Solenoid(1);
+        mRightShifter = new Solenoid(0);
+
+       //mLeft1.configSelectedFeedbackSensor(feedbackDevice);
         mLeft1.setSensorPhase(Constants.LeftDrivetrainSensorPhase);
         mLeft1.setInverted(Constants.LeftDriveMotorsInverted);
         //mLeft1.setStatusFramePeriod(frame, periodMs);
@@ -71,6 +76,10 @@ public class Drivetrain{
         mLeft1.set(ControlMode.PercentOutput, left);
         
         mRight1.set(ControlMode.PercentOutput, right);
+    }
+    public void setGear(Boolean HighGear) {
+        mLeftShifter.set(HighGear);
+        mRightShifter.set(HighGear);
     }
 } 
         

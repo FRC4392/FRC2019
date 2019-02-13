@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.Subsystems.Drivetrain;
+import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Lift;
+import frc.util.CheesyDriveHelper;
+import frc.util.DriveSignal;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,6 +28,9 @@ public class Robot extends TimedRobot {
   Drivetrain mDrivetrain = new Drivetrain();
   Lift mLift = new Lift();
   XboxController mDriverController = new XboxController(0);
+  XboxController mOperatorController = new XboxController(1);
+  CheesyDriveHelper mCheesy = new CheesyDriveHelper();
+  Intake mIntake = new Intake();
 
   /**
    * This function
@@ -49,17 +55,28 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    Double left = mDriverController.getY(Hand.kLeft);
-    Double right = mDriverController.getY(Hand.kRight);
+    DriveSignal signal = mCheesy.cheesyDrive(mDriverController.getY(Hand.kLeft), - mDriverController.getX(Hand.kRight), false);
+
+    Double left = signal.leftMotor;
+    Double right = signal.rightMotor;
 
     mDrivetrain.setLeftRight(left, right);
+    mDrivetrain.setGear(mDriverController.getBumper(Hand.kLeft));
 
-    if(mDriverController.getAButton()){
+    if(mOperatorController.getAButton()){
         mLift.setPower(-1);
-    } else if (mDriverController.getBButton()){
+    } else if (mOperatorController.getBButton()){
       mLift.setPower(1);
     } else {
       mLift.setPower(0);
+    }
+
+    if (mOperatorController.getBumper(Hand.kRight)){
+      mIntake.setIntake();
+    } else if (mOperatorController.getBumper(Hand.kLeft)){
+      mIntake.setOuttake();
+    } else {
+      mIntake.stop();
     }
   }
 
