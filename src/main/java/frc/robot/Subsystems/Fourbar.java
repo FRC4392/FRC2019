@@ -11,6 +11,7 @@ public class Fourbar{
     private Double DegreesPerRotation = 360.0;
 
     public Fourbar(){
+        mIntakePivot = new TalonSRX(31);
         mIntakePivot.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
         mIntakePivot.setSensorPhase(false);
         mIntakePivot.setInverted(false);
@@ -27,6 +28,7 @@ public class Fourbar{
        // mIntakePivot.configMotionAcceleration(sensorUnitsPer100msPerSec);
         mIntakePivot.setNeutralMode(NeutralMode.Brake);
 
+        mArmPivot = new TalonSRX(32);
         mArmPivot.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
         mArmPivot.setSensorPhase(false);
         mArmPivot.setInverted(false);
