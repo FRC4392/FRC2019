@@ -1,5 +1,6 @@
 package frc.robot.Subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -7,11 +8,11 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class Fourbar{
     private TalonSRX mIntakePivot, mArmPivot;
-    private Double CountsPerRoation = 4096.0;
+    private Double CountsPerRoation = 4096.0*2;
     private Double DegreesPerRotation = 360.0;
 
     public Fourbar(){
-        mIntakePivot = new TalonSRX(31);
+        mIntakePivot = new TalonSRX(32);
         mIntakePivot.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
         mIntakePivot.setSensorPhase(false);
         mIntakePivot.setInverted(false);
@@ -28,7 +29,7 @@ public class Fourbar{
        // mIntakePivot.configMotionAcceleration(sensorUnitsPer100msPerSec);
         mIntakePivot.setNeutralMode(NeutralMode.Brake);
 
-        mArmPivot = new TalonSRX(32);
+        mArmPivot = new TalonSRX(31);
         mArmPivot.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
         mArmPivot.setSensorPhase(false);
         mArmPivot.setInverted(false);
@@ -45,10 +46,20 @@ public class Fourbar{
        // mArmPivot.configMotionAcceleration(sensorUnitsPer100msPerSec);
         mArmPivot.setNeutralMode(NeutralMode.Brake);
     }
-    public void FourbarAngle(Double angle) {
+
+
+    public void ArmAngle(Double angle) {
         Double counts = angle * (DegreesPerRotation / CountsPerRoation);
     }
     public void IntakeAngle(Double angle) {
         Double counts = angle * (DegreesPerRotation / CountsPerRoation);
+    }
+
+    public void setArmOpenLoop(Double output){
+        mArmPivot.set(ControlMode.PercentOutput, output);
+    }
+
+    public void setIntakeOpenLoop(Double output){
+        mIntakePivot.set(ControlMode.PercentOutput, output);
     }
 }

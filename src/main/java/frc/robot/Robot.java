@@ -79,6 +79,9 @@ public class Robot extends TimedRobot {
     } else {
       mIntake.stop();
     }
+
+    mFourbar.setArmOpenLoop(mOperatorController.getY(Hand.kLeft)*.5);
+    mFourbar.setIntakeOpenLoop(mOperatorController.getY(Hand.kRight)*.5);
   }
 
   @Override
