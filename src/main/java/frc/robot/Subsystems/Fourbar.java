@@ -16,43 +16,41 @@ public class Fourbar{
         mIntakePivot.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
         mIntakePivot.setSensorPhase(false);
         mIntakePivot.setInverted(false);
-        //mIntakePivot.setStatusFramePeriod(frame, periodMs);
-        //mIntakePivot.setStatusFramePeriod(frame, periodMs);
         mIntakePivot.configNominalOutputForward(0);
         mIntakePivot.configNominalOutputReverse(0);
         mIntakePivot.configPeakOutputForward(1);
         mIntakePivot.configPeakOutputReverse(-1);
-        //mIntakePivot.selectProfileSlot(slotIdx, pidIdx);
-        //mIntakePivot.config_kF(slotIdx, value);
-        //mIntakePivot.config_kP(slotIdx, value);
-        //mIntakePivot.configMotionCruiseVelocity(sensorUnitsPer100ms);
-       // mIntakePivot.configMotionAcceleration(sensorUnitsPer100msPerSec);
+        mIntakePivot.selectProfileSlot(0, 0);
+        mIntakePivot.config_kF(0, 0);
+        mIntakePivot.config_kP(0, 0);
+        mIntakePivot.configMotionCruiseVelocity(0);
+        mIntakePivot.configMotionAcceleration(0);
         mIntakePivot.setNeutralMode(NeutralMode.Brake);
 
         mArmPivot = new TalonSRX(31);
         mArmPivot.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
         mArmPivot.setSensorPhase(false);
         mArmPivot.setInverted(false);
-        //mArmPivot.setStatusFramePeriod(frame, periodMs);
-        //mArmPivot.setStatusFramePeriod(frame, periodMs);
         mArmPivot.configNominalOutputForward(0);
         mArmPivot.configNominalOutputReverse(0);
         mArmPivot.configPeakOutputForward(1);
         mArmPivot.configPeakOutputReverse(-1);
-        //mArmPivot.selectProfileSlot(slotIdx, pidIdx);
-        //mArmPivot.config_kF(slotIdx, value);
-        //mArmPivot.config_kP(slotIdx, value);
-        //mArmPivot.configMotionCruiseVelocity(sensorUnitsPer100ms);
-       // mArmPivot.configMotionAcceleration(sensorUnitsPer100msPerSec);
+        mArmPivot.selectProfileSlot(0, 0);
+        mArmPivot.config_kF(0, 0);
+        mArmPivot.config_kP(0, 0);
+        mArmPivot.configMotionCruiseVelocity(0);
+        mArmPivot.configMotionAcceleration(0);
         mArmPivot.setNeutralMode(NeutralMode.Brake);
     }
 
 
     public void ArmAngle(Double angle) {
         Double counts = angle * (DegreesPerRotation / CountsPerRoation);
+        mArmPivot.set(ControlMode.MotionMagic, counts);
     }
     public void IntakeAngle(Double angle) {
         Double counts = angle * (DegreesPerRotation / CountsPerRoation);
+        mIntakePivot.set(ControlMode.MotionMagic, counts);
     }
 
     public void setArmOpenLoop(Double output){
