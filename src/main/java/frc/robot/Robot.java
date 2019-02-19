@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    DriveSignal signal = mCheesy.cheesyDrive(mDriverController.getY(Hand.kLeft), - mDriverController.getX(Hand.kRight), false);
+    DriveSignal signal = mCheesy.cheesyDrive(mDriverController.getY(Hand.kLeft), - mDriverController.getX(Hand.kRight), mDriverController.getBumper(Hand.kRight));
 
     Double left = signal.leftMotor;
     Double right = signal.rightMotor;
@@ -64,24 +64,83 @@ public class Robot extends TimedRobot {
     mDrivetrain.setLeftRight(left, right);
     mDrivetrain.setGear(mDriverController.getBumper(Hand.kLeft));
 
-    if(mOperatorController.getAButton()){
-        mLift.setPower(-1);
-    } else if (mOperatorController.getBButton()){
-      mLift.setPower(1);
-    } else {
-      mLift.setPower(0);
-    }
-
-    if (mOperatorController.getBumper(Hand.kRight)){
-      mIntake.setIntake();
-    } else if (mOperatorController.getBumper(Hand.kLeft)){
+    // if(mOperatorController.getXButton()){
+    //     mLift.setHeight(54.5);
+    // } else if (mOperatorController.getYButton()){
+    //   mLift.setHeight(1);
+    // } else if (mOperatorController.getBackButton()){
+    //   mLift.setHeight(27.25);
+    // }
+ 
+    if (mOperatorController.getTriggerAxis(Hand.kRight)>0.05){
+      if (mOperatorController.getStickButton(Hand.kLeft)){
+        mIntake.setOuttake();
+      } else {
+        mIntake.setIntake();
+      }
+    } else if (mOperatorController.getTriggerAxis(Hand.kLeft)>0.05){
+      if (mOperatorController.getStickButton(Hand.kLeft)){
+        mIntake.setIntake();
+      } else {
       mIntake.setOuttake();
+      }
     } else {
       mIntake.stop();
     }
 
-    mFourbar.setArmOpenLoop(mOperatorController.getY(Hand.kLeft)*.5);
-    mFourbar.setIntakeOpenLoop(mOperatorController.getY(Hand.kRight)*.5);
+    double offset = mOperatorController.getStickButton(Hand.kLeft) ? 15.0 : 0.0;
+    if (mOperatorController.getStartButton()){
+      mFourbar.IntakeAngle(2800.0);
+      mIntake.setOuttake();
+    } else if(mOperatorController.getBumper(Hand.kRight)){
+      if(mOperatorController.getStickButton(Hand.kLeft)){
+        mLift.setHeight(0);
+        mFourbar.IntakeAngle(1350.0);
+        mFourbar.ArmAngle(2666.0-2038);
+      } else {
+        mFourbar.IntakeAngle(2000.0);
+        mFourbar.ArmAngle(4000.0-2038);
+        mLift.setHeight(10);
+      }
+    } else if(mOperatorController.getBumper(Hand.kLeft)){
+        mFourbar.IntakeAngle(800.0);
+        mIntake.setOuttake();
+    }else if(mOperatorController.getAButton()){
+      //Floor pickup
+      mFourbar.ArmAngle(2666.0-2038);
+      mFourbar.IntakeAngle(2800.0);
+      mLift.setHeight(0);
+    } else if (mOperatorController.getXButton()){
+      //Low Goal
+      if (mOperatorController.getStickButton(Hand.kLeft)){
+        mFourbar.IntakeAngle(800.0);
+        mFourbar.ArmAngle(2666.0-2038);
+      } else {
+        mFourbar.IntakeAngle(2000.0);
+        mFourbar.ArmAngle(4000.0-2038);
+      }
+      mLift.setHeight(0);
+    } else if (mOperatorController.getYButton()){
+      //Medium Goal
+      mFourbar.ArmAngle(4000.0-2038);
+      if (mOperatorController.getStickButton(Hand.kLeft)){
+        mFourbar.IntakeAngle(800.0);
+      } else {
+        mFourbar.IntakeAngle(2000.0);
+      }
+      mLift.setHeight(27.25-offset);
+    } else if (mOperatorController.getBButton()){
+      //High Goal
+      mFourbar.ArmAngle(4000.0-2038);
+      if (mOperatorController.getStickButton(Hand.kLeft)){
+        mFourbar.IntakeAngle(800.0);
+      } else {
+        mFourbar.IntakeAngle(2000.0);
+      }
+      mLift.setHeight(54.5-offset);
+    }
+
+    
   }
 
   @Override

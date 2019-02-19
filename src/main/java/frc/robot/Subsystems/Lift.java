@@ -1,11 +1,14 @@
 package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Lift{
     private TalonSRX mMotor1;
@@ -25,6 +28,7 @@ public class Lift{
         mMotor2 = new VictorSPX(22);
 
         mMotor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+        mMotor1.setSelectedSensorPosition(0);
         mMotor1.setSensorPhase(false);
         mMotor1.setInverted(false);
         mMotor1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, 0);
@@ -34,10 +38,11 @@ public class Lift{
         mMotor1.configPeakOutputForward(1, 0);
         mMotor1.configPeakOutputReverse(-1, 0);
         mMotor1.selectProfileSlot(0, 0);
-        mMotor1.config_kF(0, .16, 0);
-        mMotor1.config_kP(0, .8, 0);
-        mMotor1.configMotionCruiseVelocity(6387, 0);
-        mMotor1.configMotionAcceleration(((int)(6387*2)), 0);
+        mMotor1.config_kF(0, .186, 0);
+        mMotor1.config_kP(0, 2, 0);
+        mMotor1.config_kD(0, 1, 0);
+        mMotor1.configMotionCruiseVelocity(6000, 0);
+        mMotor1.configMotionAcceleration(20000, 0);
         mMotor1.setNeutralMode(NeutralMode.Brake);
 
         mMotor2.setInverted(true);
@@ -46,8 +51,7 @@ public class Lift{
     }
 
     public void setPosition(int position) {
-        mMotor1.set(ControlMode.MotionMagic, position);
-        mMotor2.follow(mMotor1);
+        mMotor1.set(ControlMode.MotionMagic, position, DemandType.ArbitraryFeedForward, .3);
     }
 
     public void setPower(double Power) {
@@ -56,6 +60,8 @@ public class Lift{
     }
     public void setHeight(double inches) {
         double counts = (countsPerDistance * inches);
+        SmartDashboard.putNumber("LiftHeight", counts);
+        setPosition((int)counts);
     }
 
     public double getHeight() {

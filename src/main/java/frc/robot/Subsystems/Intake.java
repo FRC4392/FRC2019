@@ -8,14 +8,18 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class Intake{
     
-    double intakeSpeed = -1;
-    double outtakeSpeed = 1;
+    double intakeSpeed = 1;
+    double outtakeSpeed = -1;
 
     private TalonSRX mintake1 = new TalonSRX(41);
 
     public Intake(){
         mintake1.setInverted(true);
         mintake1.setNeutralMode(NeutralMode.Brake);
+        mintake1.configPeakCurrentDuration(100);
+        mintake1.configContinuousCurrentLimit(5);
+        mintake1.configPeakCurrentLimit(20);
+        mintake1.enableCurrentLimit(true);
     }
     
     public void setSpeed(double speed) {
