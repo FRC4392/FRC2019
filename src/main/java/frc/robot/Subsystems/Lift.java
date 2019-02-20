@@ -51,7 +51,7 @@ public class Lift{
     }
 
     public void setPosition(int position) {
-        mMotor1.set(ControlMode.MotionMagic, position, DemandType.ArbitraryFeedForward, .3);
+        mMotor1.set(ControlMode.MotionMagic, position, DemandType.ArbitraryFeedForward, .0);
     }
 
     public void setPower(double Power) {
