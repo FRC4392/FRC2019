@@ -10,8 +10,10 @@ public class Intake{
     
     double intakeSpeed = 1;
     double outtakeSpeed = -1;
+    int lastIntake = 0;
 
     private TalonSRX mintake1 = new TalonSRX(41);
+    private Solenoid mIntakeClamp = new Solenoid(3);
 
     public Intake(){
         mintake1.setInverted(true);
@@ -28,13 +30,26 @@ public class Intake{
 
     public void setIntake() {
         setSpeed(intakeSpeed);
+        openClamp();
+        lastIntake = 1;
     }
 
     public void setOuttake() {
-        setSpeed(outtakeSpeed);    
+        setSpeed(outtakeSpeed);
+        openClamp(); 
+        lastIntake = -1;   
     }
 
     public void stop() {
-        setSpeed(0);
+        setSpeed(lastIntake * .2);
+        closeClamp();
     } 
+
+    public void closeClamp(){
+        mIntakeClamp.set(false);
+    }
+
+    public void openClamp(){
+        mIntakeClamp.set(true);
+    }
 }

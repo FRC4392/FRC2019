@@ -10,10 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import frc.robot.Subsystems.Drivetrain;
-import frc.robot.Subsystems.Fourbar;
-import frc.robot.Subsystems.Intake;
-import frc.robot.Subsystems.Lift;
+import frc.robot.Subsystems.*;
 import frc.util.CheesyDriveHelper;
 import frc.util.DriveSignal;
 
@@ -33,6 +30,7 @@ public class Robot extends TimedRobot {
   CheesyDriveHelper mCheesy = new CheesyDriveHelper();
   Intake mIntake = new Intake();
   Fourbar mFourbar = new Fourbar();
+  Ramp mRamp = new Ramp();
   /**
    * This function
    *  is run when the robot is first started up and should be used
@@ -48,6 +46,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
+    teleopPeriodic();
   }
 
   @Override
@@ -56,21 +55,30 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    int intakeAdd = 0;
     DriveSignal signal = mCheesy.cheesyDrive(mDriverController.getY(Hand.kLeft), - mDriverController.getX(Hand.kRight), mDriverController.getBumper(Hand.kRight));
 
     Double left = signal.leftMotor;
     Double right = signal.rightMotor;
 
+    if(mDriverController.getTriggerAxis(Hand.kLeft) > 0.1){
+      left *= .5;
+      right *= .4;
+    }
+
     mDrivetrain.setLeftRight(left, right);
     mDrivetrain.setGear(mDriverController.getBumper(Hand.kLeft));
 
-    // if(mOperatorController.getXButton()){
-    //     mLift.setHeight(54.5);
-    // } else if (mOperatorController.getYButton()){
-    //   mLift.setHeight(1);
-    // } else if (mOperatorController.getBackButton()){
-    //   mLift.setHeight(27.25);
-    // }
+    if (mDriverController.getStartButton()){
+      mRamp.Deploy();
+      mRamp.openLatch();
+    }
+
+    if((mDriverController.getTriggerAxis(Hand.kRight) > 0.1) & mRamp.getDeployed()){
+      mRamp.engagePTO();
+    } else {
+      mRamp.disengagePTO();
+    }
  
     if (mOperatorController.getTriggerAxis(Hand.kRight)>0.05){
       if (mOperatorController.getStickButton(Hand.kLeft)){
@@ -91,38 +99,38 @@ public class Robot extends TimedRobot {
     double offset = mOperatorController.getStickButton(Hand.kLeft) ? 15.0 : 0.0;
     if (mOperatorController.getStartButton()){
       mFourbar.IntakeAngle(2800.0);
-      mIntake.setOuttake();
+      mIntake.setIntake();
     } else if(mOperatorController.getBumper(Hand.kRight)){
       if(mOperatorController.getStickButton(Hand.kLeft)){
         mLift.setHeight(0);
         mFourbar.IntakeAngle(1350.0);
-        mFourbar.ArmAngle(2666.0-2038);
+        mFourbar.ArmAngle(2666.0-2538);
       } else {
         mFourbar.IntakeAngle(2000.0);
-        mFourbar.ArmAngle(4000.0-2038);
-        mLift.setHeight(10);
+        mFourbar.ArmAngle(3600.0-2538);
+        mLift.setHeight(20);
       }
     } else if(mOperatorController.getBumper(Hand.kLeft)){
         mFourbar.IntakeAngle(800.0);
         mIntake.setOuttake();
     }else if(mOperatorController.getAButton()){
       //Floor pickup
-      mFourbar.ArmAngle(2666.0-2038);
+      mFourbar.ArmAngle(2666.0-2538);
       mFourbar.IntakeAngle(2800.0);
       mLift.setHeight(0);
     } else if (mOperatorController.getXButton()){
       //Low Goal
       if (mOperatorController.getStickButton(Hand.kLeft)){
         mFourbar.IntakeAngle(800.0);
-        mFourbar.ArmAngle(2666.0-2038);
+        mFourbar.ArmAngle(2666.0-2538);
       } else {
         mFourbar.IntakeAngle(2000.0);
-        mFourbar.ArmAngle(4000.0-2038);
+        mFourbar.ArmAngle(4000.0-2538);
       }
       mLift.setHeight(0);
     } else if (mOperatorController.getYButton()){
       //Medium Goal
-      mFourbar.ArmAngle(4000.0-2038);
+      mFourbar.ArmAngle(4000.0-2538);
       if (mOperatorController.getStickButton(Hand.kLeft)){
         mFourbar.IntakeAngle(800.0);
       } else {
@@ -131,7 +139,7 @@ public class Robot extends TimedRobot {
       mLift.setHeight(27.25-offset);
     } else if (mOperatorController.getBButton()){
       //High Goal
-      mFourbar.ArmAngle(4000.0-2038);
+      mFourbar.ArmAngle(4000.0-2538);
       if (mOperatorController.getStickButton(Hand.kLeft)){
         mFourbar.IntakeAngle(800.0);
       } else {
@@ -139,6 +147,8 @@ public class Robot extends TimedRobot {
       }
       mLift.setHeight(54.5-offset);
     }
+
+
 
     
   }

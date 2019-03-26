@@ -29,7 +29,7 @@ public class Lift{
 
         mMotor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         mMotor1.setSelectedSensorPosition(0);
-        mMotor1.setSensorPhase(true);
+        mMotor1.setSensorPhase(false);
         mMotor1.setInverted(false);
         mMotor1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, 0);
         mMotor1.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, 0);
