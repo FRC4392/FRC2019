@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
   CheesyDriveHelper mCheesy = new CheesyDriveHelper();
   Intake mIntake = new Intake();
   Fourbar mFourbar = new Fourbar();
-  Ramp mRamp = new Ramp();
+  Stilts mStilts = new Stilts();
   /**
    * This function
    *  is run when the robot is first started up and should be used
@@ -64,21 +64,11 @@ public class Robot extends TimedRobot {
     if(mDriverController.getTriggerAxis(Hand.kLeft) > 0.1){
       left *= .5;
       right *= .4;
-    }
+    } 
 
     mDrivetrain.setLeftRight(left, right);
     mDrivetrain.setGear(mDriverController.getBumper(Hand.kLeft));
-
-    if (mDriverController.getStartButton()){
-      mRamp.Deploy();
-      mRamp.openLatch();
-    }
-
-    if((mDriverController.getTriggerAxis(Hand.kRight) > 0.1) & mRamp.getDeployed()){
-      mRamp.engagePTO();
-    } else {
-      mRamp.disengagePTO();
-    }
+  
  
     if (mOperatorController.getTriggerAxis(Hand.kRight)>0.05){
       if (mOperatorController.getStickButton(Hand.kLeft)){
@@ -146,6 +136,21 @@ public class Robot extends TimedRobot {
         mFourbar.IntakeAngle(2000.0);
       }
       mLift.setHeight(54.5-offset);
+    } else if (mDriverController.getAButton()){
+      //Level 2
+      mLift.setHeight(0);
+      mFourbar.ArmAngle(0.0);
+      mFourbar.IntakeAngle(0.0);
+      mStilts.Setposition(0);
+    } else if (mDriverController.getBButton()){
+      //Level 3
+      mLift.setHeight(0);
+      mFourbar.ArmAngle(0.0);
+      mFourbar.IntakeAngle(0.0);
+      mStilts.Setposition(0);
+    } else if (mDriverController.getYButton()){
+      //Stilts up
+      mStilts.Setposition(0);
     }
 
 
