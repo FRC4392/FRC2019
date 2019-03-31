@@ -29,8 +29,8 @@ public class Fourbar{
         mIntakePivot.configMotionCruiseVelocity(766);
         mIntakePivot.configMotionAcceleration(766);
         mIntakePivot.setNeutralMode(NeutralMode.Coast);
-        mIntakePivot.configContinuousCurrentLimit(10);
-        mIntakePivot.configPeakCurrentLimit(10);
+        mIntakePivot.configContinuousCurrentLimit(40);
+        mIntakePivot.configPeakCurrentLimit(40);
         mIntakePivot.configPeakCurrentDuration(1);
         mIntakePivot.enableCurrentLimit(true);
 
@@ -50,8 +50,8 @@ public class Fourbar{
         mArmPivot.configMotionCruiseVelocity(766);
         mArmPivot.configMotionAcceleration(766);
         mArmPivot.setNeutralMode(NeutralMode.Brake);
-        mArmPivot.configContinuousCurrentLimit(10);
-        mArmPivot.configPeakCurrentLimit(10);
+        mArmPivot.configContinuousCurrentLimit(40);
+        mArmPivot.configPeakCurrentLimit(40);
         mArmPivot.configPeakCurrentDuration(1);
         mArmPivot.enableCurrentLimit(true);
     }

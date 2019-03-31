@@ -67,6 +67,11 @@ public class Robot extends TimedRobot {
     } 
 
     mDrivetrain.setLeftRight(left, right);
+
+    if (mDriverController.getAButton()){
+      mStilts.Setspeed(left);
+    }
+    
     mDrivetrain.setGear(mDriverController.getBumper(Hand.kLeft));
   
  
@@ -141,16 +146,16 @@ public class Robot extends TimedRobot {
       mLift.setHeight(0);
       mFourbar.ArmAngle(0.0);
       mFourbar.IntakeAngle(0.0);
-      mStilts.Setposition(0);
+      //mStilts.Setposition(0);
     } else if (mDriverController.getBButton()){
       //Level 3
       mLift.setHeight(0);
       mFourbar.ArmAngle(0.0);
       mFourbar.IntakeAngle(0.0);
-      mStilts.Setposition(0);
+      //mStilts.Setposition(0);
     } else if (mDriverController.getYButton()){
       //Stilts up
-      mStilts.Setposition(0);
+      //mStilts.Setposition(0);
     }
 
 

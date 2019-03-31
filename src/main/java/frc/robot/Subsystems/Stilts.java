@@ -5,6 +5,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,33 +14,38 @@ import frc.robot.Constants;
 
 public class Stilts{
 
-    private TalonSRX mStilts1, mStilts2;
+    private TalonSRX mStiltLift;
+    private CANSparkMax mStiltDrive;
 
     public Stilts(){
-        mStilts1 = new TalonSRX(51);
-        mStilts2 = new TalonSRX(52);
+        mStiltDrive = new CANSparkMax(51, MotorType.kBrushless);
+        mStiltLift = new TalonSRX(52);
 
-        //mStilts1.configSelectedFeedbackSensor(feedbackDevice);
-        mStilts1.setSensorPhase(Constants.LeftDrivetrainSensorPhase);
-        mStilts1.setInverted(Constants.LeftDriveMotorsInverted);
-        //mStilts1.setStatusFramePeriod(frame, periodMs);
-        mStilts1.configNominalOutputForward(Constants.DrivetrainNominalOutputForward);
-        mStilts1.configNominalOutputReverse(Constants.DrivetrainNominalOutputReverse);
-        mStilts1.configPeakOutputForward(Constants.DrivetrainPeakOutputForward);
-        mStilts1.configPeakOutputReverse(Constants.DrivetrainPeakOutputReverse);
-        //mStilts1.selectProfileSlot(slotIdx, pidIdx);
-        //mStilts1.config_kF(slotIdx, value, timeoutMs);
-        //mStilts1.config_kP(slotIdx, value, timeoutMs);
-        //mStilts1.configMotionCruiseVelocity(sensorUnitsPer100ms);
-        //mStilts1.configMotionAcceleration(sensorUnitsPer100msPerSec);
-        mStilts1.setNeutralMode(NeutralMode.Coast);
+        //mStiltLift.configSelectedFeedbackSensor(feedbackDevice);
+        mStiltLift.setSensorPhase(Constants.LeftDrivetrainSensorPhase);
+        mStiltLift.setInverted(Constants.LeftDriveMotorsInverted);
+        //mStiltLift.setStatusFramePeriod(frame, periodMs);
+        mStiltLift.configNominalOutputForward(Constants.DrivetrainNominalOutputForward);
+        mStiltLift.configNominalOutputReverse(Constants.DrivetrainNominalOutputReverse);
+        mStiltLift.configPeakOutputForward(Constants.DrivetrainPeakOutputForward);
+        mStiltLift.configPeakOutputReverse(Constants.DrivetrainPeakOutputReverse);
+        //mStiltLift.selectProfileSlot(slotIdx, pidIdx);
+        //mStiltLift.config_kF(slotIdx, value, timeoutMs);
+        //mStiltLift.config_kP(slotIdx, value, timeoutMs);
+        //mStiltLift.configMotionCruiseVelocity(sensorUnitsPer100ms);
+        //mStiltLift.configMotionAcceleration(sensorUnitsPer100msPerSec);
+        mStiltLift.setNeutralMode(NeutralMode.Coast);
     }
 
     public void Setspeed(double speed) {
-        mStilts1.set(ControlMode.PercentOutput, speed);
+        mStiltDrive.set(speed);
     }
 
     public void Setposition(int position) {
-        mStilts2.set(ControlMode.MotionMagic, position, DemandType.ArbitraryFeedForward, .0);
+        mStiltLift.set(ControlMode.MotionMagic, position);
+    }
+
+    public void setUpDownSpeed(double speed){
+        mStiltLift.set(ControlMode.PercentOutput, speed);
     }
 }
