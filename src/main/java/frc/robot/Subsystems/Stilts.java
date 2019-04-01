@@ -21,7 +21,7 @@ public class Stilts{
         mStiltDrive = new CANSparkMax(51, MotorType.kBrushless);
         mStiltLift = new VictorSPX(52);
 
-        mStiltDrive.setInverted(true);
+        mStiltDrive.setInverted(Constants.StiltsDriveMotorInverted);
         mStiltLift.setSensorPhase(Constants.StiltsLiftSensorPhase);
         mStiltLift.setInverted(Constants.StiltsLiftMotorInverted);
         mStiltLift.configNominalOutputForward(Constants.StiltsLiftNominalOutputForward);

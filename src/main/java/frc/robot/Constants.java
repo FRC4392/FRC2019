@@ -34,4 +34,16 @@ public class Constants {
     public static final Boolean StiltsLiftSensorPhase = false;
     public static final NeutralMode StiltsLiftNeutralMode = NeutralMode.Coast;
     public static final Boolean StiltsLiftMotorInverted = false;
+
+    //Stilts drive
+    public static final Boolean StiltsDriveMotorInverted = true;
+
+    //Intake
+    public static final Boolean IntakeMotorInverted = true;
+    public static final NeutralMode IntakeNeutralMode = NeutralMode.Brake;
+    public static final Integer IntakePeakCurrentDuration = 100;
+    public static final Integer IntakeContinuousCurrentLimit = 5;
+    public static final Integer IntakePeakCurrentLimit = 20;
+    public static final Boolean IntakeEnableCurrentLimit = true;
+
 }

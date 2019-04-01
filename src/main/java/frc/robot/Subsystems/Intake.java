@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
+import frc.robot.Constants;
 
 public class Intake{
     
@@ -16,12 +17,12 @@ public class Intake{
     private Solenoid mIntakeClamp = new Solenoid(3);
 
     public Intake(){
-        mintake1.setInverted(true);
-        mintake1.setNeutralMode(NeutralMode.Brake);
-        mintake1.configPeakCurrentDuration(100);
-        mintake1.configContinuousCurrentLimit(5);
-        mintake1.configPeakCurrentLimit(20);
-        mintake1.enableCurrentLimit(true);
+        mintake1.setInverted(Constants.IntakeMotorInverted);
+        mintake1.setNeutralMode(Constants.IntakeNeutralMode);
+        mintake1.configPeakCurrentDuration(Constants.IntakePeakCurrentDuration);
+        mintake1.configContinuousCurrentLimit(Constants.IntakeContinuousCurrentLimit);
+        mintake1.configPeakCurrentLimit(Constants.IntakeContinuousCurrentLimit);
+        mintake1.enableCurrentLimit(Constants.IntakeEnableCurrentLimit);
     }
     
     public void setSpeed(double speed) {
