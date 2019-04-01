@@ -22,4 +22,10 @@ public class Constants {
     public static final Boolean LeftDriveMotorsInverted = false;
 
     //Right Parameters
+
+    //Stilt lift
+    public static final Double StiltsLiftNominalOutputForward = 0.0;
+    public static final Double StiltsLiftNominalOutputReverse = 0.0;
+    public static final Double StiltsLiftPeakOutputForward = 1.0;
+    public static final Double StiltsLiftPeakOutputReverse = -1.0;
 }

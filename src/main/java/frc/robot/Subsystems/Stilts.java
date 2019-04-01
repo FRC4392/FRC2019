@@ -22,20 +22,12 @@ public class Stilts{
         mStiltLift = new VictorSPX(52);
 
         mStiltDrive.setInverted(true);
-
-        //mStiltLift.configSelectedFeedbackSensor(feedbackDevice);
         mStiltLift.setSensorPhase(false);
         mStiltLift.setInverted(false);
-        //mStiltLift.setStatusFramePeriod(frame, periodMs);
-        mStiltLift.configNominalOutputForward(0.0);
-        mStiltLift.configNominalOutputReverse(0.0);
-        mStiltLift.configPeakOutputForward(1.0);
-        mStiltLift.configPeakOutputReverse(-1.0);
-        //mStiltLift.selectProfileSlot(slotIdx, pidIdx);
-        //mStiltLift.config_kF(slotIdx, value, timeoutMs);
-        //mStiltLift.config_kP(slotIdx, value, timeoutMs);
-        //mStiltLift.configMotionCruiseVelocity(sensorUnitsPer100ms);
-        //mStiltLift.configMotionAcceleration(sensorUnitsPer100msPerSec);
+        mStiltLift.configNominalOutputForward(Constants.StiltsLiftNominalOutputForward);
+        mStiltLift.configNominalOutputReverse(Constants.StiltsLiftNominalOutputReverse);
+        mStiltLift.configPeakOutputForward(Constants.StiltsLiftPeakOutputForward);
+        mStiltLift.configPeakOutputReverse(Constants.StiltsLiftPeakOutputReverse);
         mStiltLift.setNeutralMode(NeutralMode.Coast);
     }
 
