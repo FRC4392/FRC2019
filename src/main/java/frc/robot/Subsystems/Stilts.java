@@ -14,12 +14,14 @@ import frc.robot.Constants;
 
 public class Stilts{
 
-    private TalonSRX mStiltLift;
+    private VictorSPX mStiltLift;
     private CANSparkMax mStiltDrive;
 
     public Stilts(){
         mStiltDrive = new CANSparkMax(51, MotorType.kBrushless);
-        mStiltLift = new TalonSRX(52);
+        mStiltLift = new VictorSPX(52);
+
+        mStiltDrive.setInverted(true);
 
         //mStiltLift.configSelectedFeedbackSensor(feedbackDevice);
         mStiltLift.setSensorPhase(Constants.LeftDrivetrainSensorPhase);
