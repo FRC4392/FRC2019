@@ -163,7 +163,7 @@ public class Robot extends TimedRobot {
       mFourbar.ArmAngle(2905.0);
     }
 
-    mStilts.setUpDownSpeed(mOperatorController.getY(Hand.kLeft));
+    
 
 
 
