@@ -22,13 +22,13 @@ public class Stilts{
         mStiltLift = new VictorSPX(52);
 
         mStiltDrive.setInverted(true);
-        mStiltLift.setSensorPhase(false);
-        mStiltLift.setInverted(false);
+        mStiltLift.setSensorPhase(Constants.StiltsLiftSensorPhase);
+        mStiltLift.setInverted(Constants.StiltsLiftMotorInverted);
         mStiltLift.configNominalOutputForward(Constants.StiltsLiftNominalOutputForward);
         mStiltLift.configNominalOutputReverse(Constants.StiltsLiftNominalOutputReverse);
         mStiltLift.configPeakOutputForward(Constants.StiltsLiftPeakOutputForward);
         mStiltLift.configPeakOutputReverse(Constants.StiltsLiftPeakOutputReverse);
-        mStiltLift.setNeutralMode(NeutralMode.Coast);
+        mStiltLift.setNeutralMode(Constants.StiltsLiftNeutralMode);
     }
 
     public void Setspeed(double speed) {

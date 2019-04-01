@@ -1,5 +1,7 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 public class Constants {
 
     //Drivetrain Constants
@@ -28,4 +30,8 @@ public class Constants {
     public static final Double StiltsLiftNominalOutputReverse = 0.0;
     public static final Double StiltsLiftPeakOutputForward = 1.0;
     public static final Double StiltsLiftPeakOutputReverse = -1.0;
+
+    public static final Boolean StiltsLiftSensorPhase = false;
+    public static final NeutralMode StiltsLiftNeutralMode = NeutralMode.Coast;
+    public static final Boolean StiltsLiftMotorInverted = false;
 }
