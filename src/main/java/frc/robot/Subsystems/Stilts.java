@@ -24,13 +24,13 @@ public class Stilts{
         mStiltDrive.setInverted(true);
 
         //mStiltLift.configSelectedFeedbackSensor(feedbackDevice);
-        mStiltLift.setSensorPhase(Constants.LeftDrivetrainSensorPhase);
-        mStiltLift.setInverted(Constants.LeftDriveMotorsInverted);
+        mStiltLift.setSensorPhase(false);
+        mStiltLift.setInverted(false);
         //mStiltLift.setStatusFramePeriod(frame, periodMs);
-        mStiltLift.configNominalOutputForward(Constants.DrivetrainNominalOutputForward);
-        mStiltLift.configNominalOutputReverse(Constants.DrivetrainNominalOutputReverse);
-        mStiltLift.configPeakOutputForward(Constants.DrivetrainPeakOutputForward);
-        mStiltLift.configPeakOutputReverse(Constants.DrivetrainPeakOutputReverse);
+        mStiltLift.configNominalOutputForward(0.0);
+        mStiltLift.configNominalOutputReverse(0.0);
+        mStiltLift.configPeakOutputForward(1.0);
+        mStiltLift.configPeakOutputReverse(-1.0);
         //mStiltLift.selectProfileSlot(slotIdx, pidIdx);
         //mStiltLift.config_kF(slotIdx, value, timeoutMs);
         //mStiltLift.config_kP(slotIdx, value, timeoutMs);
