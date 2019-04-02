@@ -149,17 +149,18 @@ public class Robot extends TimedRobot {
       mLift.setHeight(0);
       mFourbar.ArmAngle(100.0);
       mFourbar.IntakeAngle(3500.0);
-      //mStilts.Setposition(0);
-    } else if (mDriverController.getBButton()){
+      mStilts.Setposition(0);
+    } else if (mOperatorController.getPOV() == 90){
       //Level 3
-      //mLift.setHeight(0);
-      //mFourbar.ArmAngle(0.0);
-      //mFourbar.IntakeAngle(0.0);
-      //mStilts.Setposition(0);
-    } else if (mDriverController.getYButton()){
+      mLift.setHeight(0);
+      mFourbar.ArmAngle(0.0);
+      mFourbar.IntakeAngle(0.0);
+      mStilts.Setposition(0);
+    } else if (mOperatorController.getPOV() == 180){
       //Stilts up
-      //mStilts.Setposition(0);
+      mStilts.Setposition(0);
     } else if (mOperatorController.getBackButton()){
+      //Back in frame
       mFourbar.ArmAngle(2905.0);
     }
 
