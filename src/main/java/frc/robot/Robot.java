@@ -149,13 +149,13 @@ public class Robot extends TimedRobot {
       mLift.setHeight(0);
       mFourbar.ArmAngle(100.0);
       mFourbar.IntakeAngle(3500.0);
-      mStilts.Setposition(0);
+      mStilts.Setposition(13032);
     } else if (mOperatorController.getPOV() == 90){
       //Level 3
       mLift.setHeight(0);
       mFourbar.ArmAngle(0.0);
       mFourbar.IntakeAngle(0.0);
-      mStilts.Setposition(0);
+      mStilts.Setposition(28672);
     } else if (mOperatorController.getPOV() == 180){
       //Stilts up
       mStilts.Setposition(0);
