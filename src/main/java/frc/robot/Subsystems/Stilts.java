@@ -29,6 +29,11 @@ public class Stilts{
         mStiltLift.configPeakOutputForward(Constants.StiltsLiftPeakOutputForward);
         mStiltLift.configPeakOutputReverse(Constants.StiltsLiftPeakOutputReverse);
         mStiltLift.setNeutralMode(Constants.StiltsLiftNeutralMode);
+
+        mStiltLift.config_kF(0, .8, 0);
+        mStiltLift.config_kP(0, .1, 0);
+        mStiltLift.configMotionCruiseVelocity(1285, 0);
+        mStiltLift.configMotionAcceleration(1285*2, 0);
     }
 
     public void Setspeed(double speed) {
